@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Código</title>
+    <link rel="stylesheet" href="dom.css">
+</head>
+<body>
+
+    <h1>Ejercicios de Código</h1>
+
+    <!-- Ejercicio 1: Mostrar la posición del mouse -->
+    <h2>1. Mostrar la posición del mouse</h2>
+    <p id="mousePosition">Posición del mouse: </p>
+
+    <!-- Ejercicio 2: Obtener nombre y apellido -->
+    <h2>2. Obtener y mostrar nombre completo</h2>
+    <input type="text" id="firstName" placeholder="First name">
+    <input type="text" id="lastName" placeholder="Last name">
+    <button id="submitButton">Submit</button>
+    <p id="fullName"></p>
+
+    <!-- Ejercicio 3: Agregar filas y columnas -->
+    <h2>3. Agregar filas y columnas a una tabla</h2>
+    <table id="myTable" border="1">
+        <tr>
+            <td>Row 1 column 1</td>
+            <td>Row 1 column 2</td>
+        </tr>
+        <tr>
+            <td>Row 2 column 1</td>
+            <td>Row 2 column 2</td>
+        </tr>
+    </table>
+    <br>
+    <button id="insertRow">Insert row</button>
+    <button id="insertColumn">Insert column</button>
+
+    <!-- Ejercicio 4: Modificar contenido de la tabla -->
+    <h2>4. Modificar contenido de una celda</h2>
+    <table id="editTable" border="1">
+        <tr>
+            <td>Row1 cell1</td>
+            <td>Row1 cell2</td>
+            <td>Row1 cell3</td>
+        </tr>
+        <tr>
+            <td>Row2 cell1</td>
+            <td>Row2 cell2</td>
+            <td>Row2 cell3</td>
+        </tr>
+    </table>
+    <br>
+    <input type="number" id="rowIndex" placeholder="Row Index">
+    <input type="number" id="colIndex" placeholder="Col Index">
+    <input type="text" id="newValue" placeholder="New Value">
+    <button id="changeContent">Change content</button>
+
+    <!-- Ejercicio 5: Agregar y quitar opciones en un select -->
+    <h2>5. Agregar y quitar colores en una lista</h2>
+    <select id="colorSelect">
+        <option>Red</option>
+    </select>
+    <input type="text" id="colorInput" placeholder="New Color">
+    <button id="addColor">Add color</button>
+    <button id="removeColor">Remove color</button>
+
+    <!-- Ejercicio 6: Cambiar tamaño de imagen con valores aleatorios -->
+    <h2>6. Cambiar tamaño de imagen aleatoriamente</h2>
+    <img id="randomImage" src="https://via.placeholder.com/300" alt="Placeholder Image">
+
+    <script>
+        // Ejercicio 1: Mostrar la posición del mouse
+        document.addEventListener("mousemove", function(event) {
+            document.getElementById("mousePosition").innerText = `Posición del mouse: X=${event.clientX}, Y=${event.clientY}`;
+        });
+
+        // Ejercicio 2: Obtener nombre y apellido
+        document.getElementById("submitButton").addEventListener("click", function() {
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            document.getElementById("fullName").innerText = `Nombre completo: ${firstName} ${lastName}`;
+        });
+
+        // Ejercicio 3: Agregar filas y columnas a una tabla
+        document.getElementById("insertRow").addEventListener("click", function() {
+            let table = document.getElementById("myTable");
+            let newRow = table.insertRow();
+            for (let i = 0; i < table.rows[0].cells.length; i++) {
+                let newCell = newRow.insertCell();
+                newCell.innerText = "New cell";
+            }
+        });
+
+        document.getElementById("insertColumn").addEventListener("click", function() {
+            let table = document.getElementById("myTable");
+            for (let row of table.rows) {
+                let newCell = row.insertCell();
+                newCell.innerText = "New col";
+            }
+        });
+
+        // Ejercicio 4: Modificar contenido de una celda
+        document.getElementById("changeContent").addEventListener("click", function() {
+            let row = document.getElementById("rowIndex").value;
+            let col = document.getElementById("colIndex").value;
+            let newValue = document.getElementById("newValue").value;
+            
+            let table = document.getElementById("editTable");
+            if (table.rows[row] && table.rows[row].cells[col]) {
+                table.rows[row].cells[col].innerText = newValue;
+            } else {
+                alert("Índice fuera de rango.");
+            }
+        });
+
+        // Ejercicio 5: Agregar y quitar colores en una lista
+        document.getElementById("addColor").addEventListener("click", function() {
+            let color = document.getElementById("colorInput").value;
+            if (color) {
+                let option = document.createElement("option");
+                option.text = color;
+                document.getElementById("colorSelect").add(option);
+            }
+        });
+
+        document.getElementById("removeColor").addEventListener("click", function() {
+            let select = document.getElementById("colorSelect");
+            if (select.options.length > 0) {
+                select.remove(select.selectedIndex);
+            }
+        });
+
+        // Ejercicio 6: Cambiar tamaño de imagen con valores aleatorios
+        document.getElementById("randomImage").addEventListener("mouseenter", function() {
+            let width = Math.floor(Math.random() * (600 - 300 + 1)) + 300;
+            let height = Math.floor(Math.random() * (600 - 300 + 1)) + 300;
+            this.src = `https://via.placeholder.com/${width}x${height}`;
+        });
+    </script>
+
+</body>
+<footer>
+    <h2>Conclusiones</h2>
+    <p><b>Experiencia general</b></p>
+    <p>La verdad es que los ejercicos salieron a la primera,
+        tanto el html como el css, el prompt que 
+        le di fue bastante sencillo, es una herramienta util.
+    </p>
+    <p><b>¿Cuando usaras ChatGPT y cuando Copilot?</b></p>
+    <p>Pues tal vez para cosas de generación de texto y escritura pueda usar
+        ChatGPT y para codigo usaría Copilot, pues puede usar un modelo de Claude,
+        que lo vuelve mucho más eficiente.
+    </p>
+    <p><b>Ventajas y desventajas de usar IA para programar</b></p>
+    <p>En cuanto a cosas sencillas puede funcionar bastante,
+        principalmente para comprender conceptos y como funciona codigo.
+        Para programar algo más complejo siempre suele ser más ineficiente, 
+        pues constantemente tienes que pasar más tiempo depurando el codigo que te da,
+        contrario a cuando lo vas escribiendo tú.
+    </p>
+    <li><a href="index.html">Página principal</a></li>
+</html>
